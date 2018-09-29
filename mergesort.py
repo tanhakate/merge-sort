@@ -50,4 +50,3 @@ my_array = [2,7,6,8,3,2]
 y = merge_sort(my_array)
 for i in my_array:
     print (i,)
-3-way-code.py
