@@ -1,46 +1,53 @@
 def merge_sort(array):
     n = len(array)
-    if n<2:
-        midpoint = n/2
-        left = [0]*midpoint
-        right = [0]*midpoint
+    if (n < 2):
+        return
 
-        for i in range (0,midpoint-1):
-            left = array [:i]
+    midpoint = int(n / 2)
+    left = [0] * midpoint
+    right = [0] * (n - midpoint)
 
-        for j in range (midpoint,n-1):
-            right = array [j:]
+    for i in range(0, midpoint):  # adding each of the elements separately
+        left[i] = array[i]
 
-        merge_sort(left)
+    for j in range(midpoint, n):
+        right[j - midpoint] = array[j]
 
-        merge_sort(right)
+    merge_sort(left)
 
-        merge(left,right,array)
+    merge_sort(right)
 
-def merge(left,right,a):
-    l = length(left)
-    r = lenght(right)
+    merge(left, right, array)
+
+
+def merge(left, right, a):
+    l = len(left)
+    r = len(right)
     i = j = k = 0
-    while i<l and j <r and k < len(a):
-        if l[i]>=r[j]:
-            a[k] = r[j]
+    while (i < l and j < r):
+        if left[i] >= right[j]:
+
+            a[k] = right[j]
             j += 1
-        elif l[i]<r[j]:
-            a[k] = l[i]
-            l += 1
-        k+=1
-        
-    # the remaining section is if one sublist is added to the original array and there are left overs
-    # leftovers can be only in one sublist at a time
+        else:
+            a[k] = left[i]
+            i += 1
+        k += 1
+    # one sublist is added to the original array and there are left overs
+    # there can be leftovers only in one sublist
 
-    while i<l: #if there are leftovers in l
-        A[k] = l[i]
-        i+= 1
-        k+=1
+    while (i < l):
+        a[k] = left[i]
+        i += 1
+        k += 1
 
-    while j<r: # if there are leftover in r
-        A[k] = r[j]
-        j+= 1
-        k+=1
+    while (j < r):
+        a[k] = right[j]
+        j += 1
+        k += 1
 
-    return (a)
+my_array = [2,7,6,8,3,2]
+y = merge_sort(my_array)
+for i in my_array:
+    print (i,)
+3-way-code.py
