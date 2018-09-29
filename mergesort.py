@@ -30,8 +30,8 @@ def merge(left,right,a):
             l += 1
         k+=1
         
-    # one sublist is added to the original array and there are left overs
-    # there can be leftovers only in one sublist
+    # the remaining section is if one sublist is added to the original array and there are left overs
+    # leftovers can be only in one sublist at a time
 
     while i<l: #if there are leftovers in l
         A[k] = l[i]
