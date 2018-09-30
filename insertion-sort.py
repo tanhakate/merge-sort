@@ -11,9 +11,6 @@ def insertion_sort(array):
 
         array[position] = currentvalue
 
-
-    return steps
-
 myArray = [54,26,93,17,77,31,44,55,20]
 insertion_sort(myArray)
 print(myArray)
