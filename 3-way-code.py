@@ -113,8 +113,6 @@ def insertion_sort(array):
             position = position - 1
         array[position] = currentvalue #inserting the current value into the position after which all elements are greater
 
-def mixed_sort()
-
 
 
 
