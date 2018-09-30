@@ -1,4 +1,4 @@
-def merge_sort(array, certain_length):
+def merge_sort(array):
     n = len(array)
     if (n < 3):
         return
@@ -19,15 +19,15 @@ def merge_sort(array, certain_length):
 
     if len(left) < certain_length:
         insertion_sort(left)
-    else: merge_sort(left)
+    else: merge_sort(left,certain_length)
 
     if len(center) < certain_length:
         insertion_sort(left)
-    else: merge_sort(center)
+    else: merge_sort(center,certain_length)
 
     if len(right) < certain_length:
         insertion_sort(right)
-    else: merge_sort(right)
+    else: merge_sort(right,certain_length)
 
     merge(left, center, right, array)
 
@@ -112,6 +112,11 @@ def insertion_sort(array):
             array[position] = array[position-1] # if the previous element is greater than the element in the current position, move the previous element to the current position
             position = position - 1
         array[position] = currentvalue #inserting the current value into the position after which all elements are greater
+
+def mixed_sort()
+
+
+
 
 my_array = [2,7,6,8,3,2,9,7,8,11,3,2,6,7,12,33,4,29,1]
 merge_sort(my_array, 4)
