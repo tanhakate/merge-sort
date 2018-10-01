@@ -1,121 +1,107 @@
 def merge_sort(array):
-    n = len(array)
+    n = len(array) #calculate the length of the array
+    
     if (n < 3):
-        return
+        return #if the length of the array is less than three, skip the remaining code
 
-    mid = int(n // 3)
-    left = [0] * mid
+    mid = int(n // 3) #find the length up till the position that is 1/3rd way in the array. Floor division is useful because the length of our array might not be a multiple of 3.  
+    
+    left = [0] * mid #create three empty arrays of size mid 
     center = [0] * mid
-    right = [0] * (n - 2 * mid)
+    right = [0] * (n - 2 * mid) #the third array contains all the remaining elements from index position 2*mid onwards, in case the total length of our array is not a multiple of three 
 
     for i in range(0, mid):
-        left[i] = array[i]
+        left[i] = array[i] #pass indices from the main list into the left sublist from the first index up till the 1/3 index
 
-    for j in range(mid, 2 * mid):
+    for j in range(mid, 2 * mid):  #pass indices from the main list into the right sublist from the 1/3 index up till the 2/3 index 
         center[j - mid] = array[j]
 
-    for k in range(2 * mid, n):
+    for k in range(2 * mid, n): #pass indices from the main list into the center sublist from the 2/3 index to the end of the list
         right[k - 2 * mid] = array[k]
 
-    if len(left) < certain_length:
-        insertion_sort(left)
-    else: merge_sort(left,certain_length)
+    merge_sort(left) #this is the recursion step. Call merge_sort on the left sublist. 
+    #The sublist will be further divided into three sublists and the left sub-sublist will once again invoke merge-sort until we reach base condition i.e. n<3.
+    #Once we reach base condition, the elements in the sublist will be sorted by passing each sublist to the merge function. 
 
-    if len(center) < certain_length:
-        insertion_sort(left)
-    else: merge_sort(center,certain_length)
+    merge_sort(center) # Call merge_sort recursively on the center sublist.
 
-    if len(right) < certain_length:
-        insertion_sort(right)
-    else: merge_sort(right,certain_length)
+    merge_sort(right) # Call merge_sort recursively on the right sublist.
 
-    merge(left, center, right, array)
+    merge(left, center, right, array) #Each time that we pass sublists into the merge function, it will return a subarray with the sorted sublists. 
 
 
 def merge(left, center, right, a):
-    l = len(left)
-    c = len(center)
-    r = len(right)
-    i = j = k = z = 0 #z is index of the original list
+    l = len(left) #calculate length of left subarray
+    c = len(center) #calculate length of center subarray
+    r = len(right) #calcualte length of right subarray
+    i = j = k = z = 0 #z is index of the array a, whereas i,j and k are the indices of left, center and right subarrays respectively 
 
-    while (i < l and j < r and k < c): #After first iteration, l = 1, therefore we will no longer go into this while loop
-        if left[i] <= right[j] and left[i] <= center[k]:
+    while (i < l and j < r and k < c): #while the indices of all the subarrays are less than the length of the subarrays, we compare the element i of each subarray with the jth and kth element of the center and right subarrays. 
+        #Note that after the first iteration on the base condition (n=3), the length of one of the subarrays will be equal to the value of the index. We have fully traversed one of the subarrays, therefore we will no longer go into this while loop.
+        if left[i] <= right[j] and left[i] <= center[k]: #If the left array has the minimum value, we add it to the array a.
             a[z] = left[i]
-            i += 1
-        elif center[k] <= right[j] and center[k] <= left[i]:
+            i += 1 #increase the index value of the left array i.e. compare the i+1 element in the subarry with the jth and kth elements of the other arrays.
+        elif center[k] <= right[j] and center[k] <= left[i]: #Otherwise if the center array has the minimum value, we add it to the array a
             a[z] = center[k]
-            k += 1
+            k += 1 #increase the index value of the center array i.e. compare the k+1 element in the subarry with the ith and jth elements of the other arrays.
         else:
-            a[z] = right[j]
-            j += 1
+            a[z] = right[j] #If the right array has the minimum value, we add it to the array a.
+            j += 1 #increase the index value of the right array i.e. compare the j+1 element in the subarry with the ith and kth elements of the other arrays.
 
-        z += 1
+        z += 1 #After an iteration in the while loop, we have added an element to array a. Therefore, we will increase the index by one since now we have to fill in the next sorted element. 
 
-#cases where the second and third sublists have remaining values
-    while (k<c and j<r):
+#The following while loops concern cases where the second and third subarry have remaining values
+    while (k<c and j<r): 
         if center[k]<= right[j]:
-            a[z] = center[k]
+            a[z] = center[k] #If the center array has the minimum value, add it to the array a and increase the value of its index.
             k += 1
         else:
-            a[z] = right[j]
+            a[z] = right[j] #If the right array has the minimum value, add it to the array a and increase the value of its index.
             j += 1
-        z += 1
+            
+        z += 1 #After an iteration in the while loop, we have added an element to array a. Therefore, we will increase the index by one since now we have to fill in the next sorted element. 
 
-# cases where the first and third sublists have remaining values
 
+#The following while loops concern cases where the left and right subarry have remaining values
     while(i<l and j<r):
         if left[i] <= right[j]:
-            a[z] = left[i]
+            a[z] = left[i] #If the left array has the minimum value, add it to the array a and increase the value of its index
             i += 1
         else:
-            a[z] = left[j]
+            a[z] = right[j] #If the right array has the minimum value, add it to the array a and increase the value of its index
             j += 1
-        z += 1
-    # cases where the first and second sublists have remaining values
-
+            
+        z += 1 #After an iteration in the while loop, we have added an element to array a. Therefore, we will increase the index by one since now we have to fill in the next sorted element. 
+        
+#The following while loops concern cases where the left and center subarry have remaining values
     while (i < l and k < c):
         if left[i] <= center[k]:
-            a[z] = left[i]
+            a[z] = left[i] #If the left array has the minimum value, add it to the array a and increase the value of its index
             i += 1
         else:
-            a[z] = center[k]
+            a[z] = center[k] #If the center array has the minimum value, add it to the array a and increase the value of its index
             k += 1
 
-        z += 1
+        z += 1 #After an iteration in the while loop, we have added an element to array a. Therefore, we will increase the index by one since now we have to fill in the next sorted element. 
 
-    # one sublist is added to the original array and there are left overs
-    # there can be leftovers only in one sublist
+#The following while loops concern cases where only a single subarray has remaining values i.e. there are leftovers in one subarray. Note that the leftovers are already sorted since the merge operation begins from the base case. 
 
     while (i < l):
-        a[z] = left[i]
+        a[z] = left[i] #If left array has remaining values, iteratively add the leftovers elements from the left array. 
         i += 1
-        z += 1
+        z += 1 #After adding a new element onto the main array a, increase the index number. 
 
     while (k < c):
-        a[z] = center[k]
+        a[z] = center[k] #If center array has remaining values, iteratively add the leftovers elements from the left array.
         k += 1
-        z += 1
+        z += 1 #After adding a new element onto the main array a, increase the index number. 
+
 
     while (j < r):
-        a[z] = right[j]
+        a[z] = right[j] #If right array has remaining values, iteratively add the leftovers elements from the left array.
         j += 1
-        z += 1
-
-def insertion_sort(array):
-
-    for i in range (1,len(array)):
-
-        currentvalue = array[i]
-        position = i
-
-        while position>0 and currentvalue<array[position-1]: # run the while loop as long as the element in the previous position is greater than current value
-            array[position] = array[position-1] # if the previous element is greater than the element in the current position, move the previous element to the current position
-            position = position - 1
-        array[position] = currentvalue #inserting the current value into the position after which all elements are greater
-
-
-
-
+        z += 1 #After adding a new element onto the main array a, increase the index number. 
+        
 my_array = [2,7,6,8,3,2,9,7,8,11,3,2,6,7,12,33,4,29,1]
-merge_sort(my_array, 4)
+merge_sort(my_array)
 print(my_array)
