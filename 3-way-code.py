@@ -82,7 +82,7 @@ def merge(left, center, right, a):
             
         z += 1 #After an iteration in the while loop, we have added an element to array a. Therefore, we will increase the index by one since now we have to fill in the next sorted element. 
         
-#The followinghttp://localhost:8888/notebooks/CS110%20Assignment.ipynb# while loops concern cases where the left and center subarry have remaining values
+#The following while loops concern cases where the left and center subarry have remaining values
     while (i < l and k < c):
         if left[i] <= center[k]:
             a[z] = left[i] #If the left array has the minimum value, add it to the array a and increase the value of its index
