@@ -1,10 +1,19 @@
 def merge_sort(array):
     n = len(array) #calculate the length of the array
     
-    if (n < 3):
-        return #if the length of the array is less than three, skip the remaining code
+    if (n < 2):
+        return #if the length of the array is less than three, skip the recursion
 
-    mid = int(n // 3) #find the length up till the position that is 1/3rd way in the array. Floor division is useful because the length of our array might not be a multiple of 3.  
+    if(n==2): #if the length of the subarray is equal to 2, switch places if the elements are out of order
+        if array[0]<array[1]:
+            return
+        else:
+            temp = array[0]
+            array[0] = array[1]
+            array[1] = temp
+            return
+
+    mid = int(n // 3) #find the length up till the position that is 1/3rd way in the array. Floor division is useful because the length of our array might not be a multiple of 3.
     
     left = [0] * mid #create three empty arrays of size mid 
     center = [0] * mid
@@ -73,7 +82,7 @@ def merge(left, center, right, a):
             
         z += 1 #After an iteration in the while loop, we have added an element to array a. Therefore, we will increase the index by one since now we have to fill in the next sorted element. 
         
-#The following while loops concern cases where the left and center subarry have remaining values
+#The followinghttp://localhost:8888/notebooks/CS110%20Assignment.ipynb# while loops concern cases where the left and center subarry have remaining values
     while (i < l and k < c):
         if left[i] <= center[k]:
             a[z] = left[i] #If the left array has the minimum value, add it to the array a and increase the value of its index
@@ -101,7 +110,3 @@ def merge(left, center, right, a):
         a[z] = right[j] #If right array has remaining values, iteratively add the leftovers elements from the left array.
         j += 1
         z += 1 #After adding a new element onto the main array a, increase the index number. 
-        
-my_array = [2,7,6,8,3,2,9,7,8,11,3,2,6,7,12,33,4,29,1]
-merge_sort(my_array)
-print(my_array)
