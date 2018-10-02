@@ -46,5 +46,5 @@ def merge(left, right, a):
 
                 
 my_array = [2,7,6,8,3,2]
-merge_sort(my_array)
+merge_sort_2(my_array)
 print(my_array)
