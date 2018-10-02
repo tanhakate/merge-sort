@@ -110,3 +110,10 @@ def merge(left, center, right, a):
         a[z] = right[j] #If right array has remaining values, iteratively add the leftovers elements from the left array.
         j += 1
         z += 1 #After adding a new element onto the main array a, increase the index number. 
+        
+        
+import random
+my_array = random.sample(range(100), 10) #generate a random list with 9 elements under range 100
+print(my_array)
+merge_sort(my_array) #merge_sort the list
+print(my_array)
