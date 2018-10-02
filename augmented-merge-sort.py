@@ -136,3 +136,9 @@ def insertion_sort(array):
         array[position] = currentvalue #inserting the current value into the position after which all elements are greater
         
         
+import random
+my_array = random.sample(range(100), 10) #generate a random list with 10 elements under range 100
+print(my_array)
+merge_sort(my_array, 4) #merge_sort the list, applying insertion sort when the length of the subarry is less than 4
+print(my_array)
+
