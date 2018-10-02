@@ -1,4 +1,4 @@
-def merge_sort(array):
+def merge_sort_2(array):
     n = len(array)
     if (n < 2):
         return
@@ -13,9 +13,9 @@ def merge_sort(array):
     for j in range(midpoint, n):
         right[j - midpoint] = array[j]
 
-    merge_sort(left)
+    merge_sort_2(left)
 
-    merge_sort(right)
+    merge_sort_2(right)
 
     merge(left, right, array)
 
@@ -33,8 +33,6 @@ def merge(left, right, a):
             a[k] = left[i]
             i += 1
         k += 1
-    # one sublist is added to the original array and there are left overs
-    # there can be leftovers only in one sublist
 
     while (i < l):
         a[k] = left[i]
@@ -46,7 +44,7 @@ def merge(left, right, a):
         j += 1
         k += 1
 
+                
 my_array = [2,7,6,8,3,2]
-y = merge_sort(my_array)
-for i in my_array:
-    print (i,)
+merge_sort(my_array)
+print(my_array)
